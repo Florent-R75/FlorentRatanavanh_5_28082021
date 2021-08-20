@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="./node_modules/bootstrap-icons/icons/bag.svg"
+    />
+    <script
+      src="https://kit.fontawesome.com/56d6956961.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Produit</title>
+  </head>
+
+  <body>
+    <div class="bg-dark">
+      <div class="container">
+        <div class="row">
+          <nav class="col navbar navbar-expand-lg navbar-dark">
+            <a href="index.html" class="navbar-brand"
+              ><img src="./images/logo.png" alt="logo" style="width: 10rem" ;
+            /></a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggle-icon"></span>
+            </button>
+            <div id="navbarContent" class="collapse navbar-collapse">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.html">Accueil</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Panier</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <main class="container">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <img
+              src="./images/teddy_1.jpg"
+              alt="Ours Marron"
+              class="card-img-top"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Norbert</h5>
+              <p class="card-text">2900€</p>
+            </div>
+
+            <div>
+              <label for="quantite">Quantite</label>
+              <select name="quantite" id="quantite">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+              </select>
+            </div>
+
+            <div>
+              <p>Choisissez votre Couleur</p>
+              <input type="radio" name="couleur" id="Tan" value="Tan" />
+              <label for="Tan">Tan</label>
+
+              <input
+                type="radio"
+                name="couleur"
+                id="Chocolate"
+                value="Chocolate"
+              />
+              <label for="Chocolate">Chocolate</label>
+
+              <input type="radio" name="couleur" id="Black" value="Black" />
+              <label for="Black">Black</label>
+
+              <input type="radio" name="couleur" id="White" value="White" />
+              <label for="White">White</label>
+            </div>
+
+            <button type="submit" href="#" class="btn btn-primary">
+              Ajouter au Panier
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-dark footer">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <ul class="list-inline">
+              <li class="list-inline-item footer-text">Contact</li>
+              <li class="list-inline-item footer-text">Partenaires</li>
+              <li class="list-inline-item footer-text">Twitter</li>
+              <li class="list-inline-item footer-text">Facebook</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
