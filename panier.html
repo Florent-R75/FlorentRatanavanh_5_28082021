@@ -19,7 +19,9 @@
   </head>
 
   <body>
-    <div class="bg-dark">
+    <!-- Navbar -->
+
+    <div class="bg-info">
       <div class="container">
         <div class="row">
           <nav class="col navbar navbar-expand-lg navbar-dark">
@@ -40,11 +42,11 @@
             <div id="navbarContent" class="collapse navbar-collapse">
               <ul class="navbar-nav">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Accueil</a>
+                  <a class="nav-link text-white" href="index.html">Accueil</a>
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Panier</a>
+                  <a class="nav-link text-white" href="#">Panier</a>
                 </li>
               </ul>
             </div>
@@ -59,18 +61,12 @@
       <div class="row">
         <div class="col">
           <div class="card">
-            <img
-              src="./images/teddy_1.jpg"
-              alt="Ours Marron"
-              class="card-img-top"
-            />
-            <legend>Votre Panier</legend>
-            <div class="card-body prixTotal">
-              <h5 class="card-title">Norbert</h5>
+            <legend id="root">Votre Panier</legend>
+            <div class="card-body">
+              <h1 class="card-title"></h1>
               <p class="card-text">Récapitulatif Commande</p>
 
-              <div>
-                <table class="prixTotal">
+              <!-- <table class="prixTotal">
                   <tr class="prixTotal">
                     <td class="prixTotal">Prix</td>
                     <td class="prixTotal">2900€</td>
@@ -84,8 +80,7 @@
                     <td class="prixTotal">Total</td>
                     <td class="prixTotal">5800€</td>
                   </tr>
-                </table>
-              </div>
+                </table> -->
             </div>
 
             <div>
@@ -120,15 +115,15 @@
       </div>
     </main>
 
-    <footer class="bg-dark footer">
+    <footer class="bg-info" footer">
       <div class="container">
         <div class="row">
           <div class="col">
-            <ul class="list-inline">
-              <li class="list-inline-item footer-text">Contact</li>
-              <li class="list-inline-item footer-text">Partenaires</li>
-              <li class="list-inline-item footer-text">Twitter</li>
-              <li class="list-inline-item footer-text">Facebook</li>
+            <ul class="list-inline text-center">
+              <li class="list-inline-item footer-text text-white">Contact</li>
+              <li class="list-inline-item footer-text text-white">Partenaires</li>
+              <li class="list-inline-item footer-text text-white">Twitter</li>
+              <li class="list-inline-item footer-text text-white">Facebook</li>
             </ul>
           </div>
         </div>

@@ -1,27 +1,40 @@
 // utiliser fetch pour récupérer les produits.
 // reporter des erreurs eventuelles dans la récupération fetch
 
+
+
+
+
 fetch("http://localhost:3000/api/teddies")
   .then(function (response) {
     if (response.ok) {
       return response.json();
     }
   })
-  .then(function (products) {
-    for (index = 0; index < products.length; index++) {
-      showProduct(products[index]);
-      console.log(products[index]);
+  .then(function (items) {
+    for ( index = 0; index < items.length; index++) {
+      showProduct(items[index]);
+      console.table(items[index]);
+
     }
   })
 
+
+
+
+
   .catch(function (err) {
     console.log("Fetch problem" + err.message);
-  });
+  })
 
-//   creer un variable source noeud HTML
+
+
+
 
 // Affiche un produit a l'interieur du <root> element>
+
 function showProduct(product) {
+  
   // Initialisation de variables
 
   const card = document.createElement("a");
@@ -33,12 +46,21 @@ function showProduct(product) {
   const description = document.createElement("p");
   const colorsList = document.createElement("ul");
   const colors = document.createElement("li");
+  const button = document.createElement("button");
 
   // Attribution de contenus
 
-  heading.textContent = product.name;
-  para.textContent = product.price + "€";
-  colors.textContent = product.colors;
+  heading.textContent = "Nom : " + product.name;
+  para.textContent = "Prix: " + product.price / 100 + " €";
+  description.textContent = "Description: " + product.description;
+  button.textContent = "Ajouter au Panier";
+  colors.textContent = "Couleurs disponibles: " + product.colors;
+
+
+
+
+
+
 
   // Attribution de classes
 
@@ -46,26 +68,47 @@ function showProduct(product) {
   image.setAttribute("alt", product.description);
   card.setAttribute("class", "col-12 col-sm-4");
 
-  // Attribution de noeuds NOD
+  card.setAttribute("href", "produit.html?id=" + product._id);
+
+
+  // Attribution de noeuds NOEUD
 
   let root = document.querySelector(".teddy");
-  // let colorsArray = [];
+
   root.appendChild(card);
 
   card.appendChild(image);
   card.appendChild(cardbody);
   cardbody.appendChild(heading);
+  cardbody.appendChild(description);
   cardbody.appendChild(para);
   cardbody.appendChild(colorsList);
   colorsList.appendChild(colors);
+  cardbody.appendChild(button);
 
-  // Attribution Couleurs
 
-  // for (index = 0; index < colorsArray.length; i++) {
-  // colors = colorsArray[index];
-  // }
-
-  // style css
+  // Style css
 
   image.style.height = "300px";
+  card.style.textDecoration = "none";
+  colorsList.style.listStyle = "none";
+
 }
+
+// Attribution d'evenement
+
+
+function addBasket() {
+  let button = querySelector("button");
+  let monStockage = localStorage;
+  button.addEventListener(click, monStockage.setItem('id'))
+  console.log("monStockage");
+
+}
+
+
+
+
+
+
+
