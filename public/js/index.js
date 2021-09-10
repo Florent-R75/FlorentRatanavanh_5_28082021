@@ -46,14 +46,14 @@ function showProduct(product) {
   const description = document.createElement("p");
   const colorsList = document.createElement("ul");
   const colors = document.createElement("li");
-  const button = document.createElement("button");
+  const stock = document.createElement("p");
 
   // Attribution de contenus
 
-  heading.textContent = "Nom : " + product.name;
+  heading.textContent = product.name;
   para.textContent = "Prix: " + product.price / 100 + " €";
-  description.textContent = "Description: " + product.description;
-  button.textContent = "Ajouter au Panier";
+  description.textContent = product.description;
+  stock.textContent = "En Stock";
   colors.textContent = "Couleurs disponibles: " + product.colors;
 
 
@@ -63,13 +63,17 @@ function showProduct(product) {
 
 
   // Attribution de classes
-
+;
   image.setAttribute("src", product.imageUrl);
   image.setAttribute("alt", product.description);
-  card.setAttribute("class", "col-12 col-sm-4");
+  image.setAttribute("class", "card-img-top");
+  card.setAttribute("class", "col-12 col-sm-4 card text-white bg-primary");
 
   card.setAttribute("href", "produit.html?id=" + product._id);
-
+  cardbody.setAttribute("class", "card-body");
+  heading.setAttribute("class", "card-title");
+  para.setAttribute("class", "card-text fw-bold fs-4");
+  stock.setAttribute("class", "btn btn-success");
 
   // Attribution de noeuds NOEUD
 
@@ -81,30 +85,21 @@ function showProduct(product) {
   card.appendChild(cardbody);
   cardbody.appendChild(heading);
   cardbody.appendChild(description);
-  cardbody.appendChild(para);
   cardbody.appendChild(colorsList);
   colorsList.appendChild(colors);
-  cardbody.appendChild(button);
+  cardbody.appendChild(para);
+  cardbody.appendChild(stock);
 
 
   // Style css
 
-  image.style.height = "300px";
+  // image.style.height = "300px";
   card.style.textDecoration = "none";
   colorsList.style.listStyle = "none";
 
 }
 
-// Attribution d'evenement
 
-
-function addBasket() {
-  let button = querySelector("button");
-  let monStockage = localStorage;
-  button.addEventListener(click, monStockage.setItem('id'))
-  console.log("monStockage");
-
-}
 
 
 

@@ -21,7 +21,7 @@
   <body>
     <!-- Navbar -->
 
-    <div class="bg-info">
+    <div class="bg-danger">
       <div class="container">
         <div class="row">
           <nav class="col navbar navbar-expand-lg navbar-dark">
@@ -60,62 +60,21 @@
     <main class="container">
       <div class="row">
         <div class="col">
-          <div class="card">
+          
             <legend id="root">Votre Panier</legend>
-            <div class="card-body">
+            
               <h1 class="card-title"></h1>
-              <p class="card-text">Récapitulatif Commande</p>
+              <p class="card-text" id="container-produits-panier">Récapitulatif Commande</p>
 
-              <!-- <table class="prixTotal">
-                  <tr class="prixTotal">
-                    <td class="prixTotal">Prix</td>
-                    <td class="prixTotal">2900€</td>
-                  </tr>
-                  <tr class="prixTotal">
-                    <td class="prixTotal">Quantite</td>
-                    <td class="prixTotal prixTotal_1">2</td>
-                  </tr>
+              
+            
 
-                  <tr class="prixTotal">
-                    <td class="prixTotal">Total</td>
-                    <td class="prixTotal">5800€</td>
-                  </tr>
-                </table> -->
-            </div>
-
-            <div>
-              <legend>Veuillez remplir ce formulaire pour la commande</legend>
-
-              <div class="prixTotal">
-                <form action="" method="POST" target="_blank">
-                  <label for="">Nom:</label>
-                  <input type="text" name="Nom" id="Nom" />
-                </form>
-
-                <form action="" method="POST" target="_blank">
-                  <label for="">Prenom:</label>
-                  <input type="text" name="Prenom" id="Prenom" />
-                </form>
-
-                <form action="" method="POST" target="_blank">
-                  <label for="">Adresse</label>
-                  <input type="text" name="Adresse" id="Adresse" />
-                </form>
-
-                <form action="" method="POST" target="_blank">
-                  <label for="">Numero Carte Bancaire</label>
-                  <input type="text" name="CarteBancaire" id="CarteBancaire" />
-                </form>
-
-                <button>Passez la commande</button>
-              </div>
-            </div>
-          </div>
+            
         </div>
       </div>
     </main>
 
-    <footer class="bg-info" footer">
+    <footer class="bg-danger" footer">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -130,4 +89,5 @@
       </div>
     </footer>
   </body>
+  <script src="public/js/panier.js"></script>
 </html>
