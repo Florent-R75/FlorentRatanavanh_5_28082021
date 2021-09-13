@@ -5,8 +5,7 @@ let panier = JSON.parse(localStorage.getItem("panier"));
 
 // Assigner un index au panier
 
-// let index = panier.length;
-// const formulaire = document.querySelector(".prixTotal");
+
 
 // Extraire les objets du panier
 
@@ -195,8 +194,7 @@ const afficherFormulaireHtml = () => {
                       <label for="ville" class="form-label">Ville</label>
                       <input type="text" name="Ville" id="ville" class="form-control" required>
                     
-                      <label for="codepostal" class="form-label">Code Postal</label>
-                      <input type="text" name="Codepostal" id="codepostal" class="form-control" required>
+                      
     
                       <label for="email" class="form-label">Email</label>
                       <input type="text" name="Email" id="email" class="form-control" required> 
@@ -240,12 +238,12 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
 
     // Recuperation des valeurs du formulaires
 
-    const formulaireValues = {
-        nom: document.querySelector("#nom").value,
-        prenom: document.querySelector("#prenom").value,
-        adresse: document.querySelector("#adresse").value,
-        ville: document.querySelector("#ville").value,
-        codepostal: document.querySelector("#codepostal").value,
+    const contact = {
+        firstName: document.querySelector("#nom").value,
+        lastName: document.querySelector("#prenom").value,
+        address: document.querySelector("#adresse").value,
+        city: document.querySelector("#ville").value,
+        
         email: document.querySelector("#email").value,
     }
 
@@ -260,13 +258,10 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
     }
 
     const regExPrenomNomVille = (value) => {
-        return /^[A-Za-z\s]{3,20}$/.test(value);
+        return /^([A-Za-z\s]{3,20})?([-]{0,1})?(([A-Za-z\s]{3,20}))$/.test(value);
     }
 
-    const regExCodePostal = (value) => {
-        return /^[0-9]{5}$/.test(value);
-    }
-
+    
     const regExEmail = (value) => {
         return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
     }
@@ -280,7 +275,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
     function nomControle() {
 
 
-        const leNom = formulaireValues.nom;
+        const leNom = contact.firstName;
         if (regExPrenomNomVille(leNom)) {
             return true;
 
@@ -296,7 +291,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
     function prenomControle() {
 
 
-        const lePrenom = formulaireValues.prenom;
+        const lePrenom = contact.lastName;
         if (regExPrenomNomVille(lePrenom)) {
 
             return true;
@@ -312,7 +307,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
     function adresseControle() {
 
 
-        const ladresse = formulaireValues.adresse;
+        const ladresse = contact.address;
         
         if (regExAdresse(ladresse)) {
 
@@ -330,7 +325,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
     function villeControle() {
 
 
-        const laVille = formulaireValues.ville;
+        const laVille = contact.city;
         if (regExPrenomNomVille(laVille)) {
 
             return true;
@@ -344,32 +339,23 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
 
     }
 
+  let products = panier.map(function(product){
+      return product._id
+  });
+
+  console.log(products);
+
     // --------REGEXP Code Postal---------
 
 
-    function codePostalControle() {
-
-        const leCodePostal = formulaireValues.codepostal;
-
-
-
-        if (regExCodePostal(leCodePostal)) {
-            return true;
-
-
-        } else {
-
-            alert("Le Code Postale doit être composé de 5 chiffres");
-            return false;
-        }
-    }
+    
     // -------REGEXP Email------------------------
 
 
     function emailControl() {
 
 
-        const lemail = formulaireValues.email;
+        const lemail = contact.email;
 
         if (regExEmail(lemail)) {
 
@@ -390,9 +376,9 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
 
     // Controler la validité du formulaire avant l'envoi
 
-    if (nomControle() && prenomControle() && villeControle() && codePostalControle() && emailControl() && adresseControle()) {
+    if (nomControle() && prenomControle() && villeControle() && emailControl() && adresseControle()) {
 
-        localStorage.setItem("formulaireValues", JSON.stringify(formulaireValues));
+        localStorage.setItem("contact", JSON.stringify(contact));
 
 
     } else {
@@ -404,40 +390,78 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
     // -------------FIN Gestion de validation du Formulaire---------
 
 
+    // -------------Recuperer les id du panier-----------------------
+
+
+
+
+
     // --------REGROUPER le panier et le formulaire avant l'envoi au serveur----------
 
-    const aEnvoyer = {
-        panier,
-        formulaireValues
-    }
+    
+
+console.log(JSON.stringify({products, contact}));
 
 
+//------------------------- Envoyer le formulaire et le produit sur le serveur.
+
+const promise01 = fetch("http://localhost:3000/api/teddies/order", {
+    method : "POST",
+    body: JSON.stringify({products, contact}),
+    headers:{
+        "Content-Type":"application/json",
+        "Accept":"application/json",
+    },
 });
 
-// -----------------Mettre le contenu du local storage dans les champs du formulaires--------------
+// pour voir le resultat du serveur dans la console
 
-// Prendre la key du local Storage et la metrre dans une variable
+promise01.then(async(response)=>{
+   
+   
+//    Si la promesse n'est pas résolu , il faut gérer l'erreur.
+   
+    try{
 
-const dataLocalStorage = localStorage.getItem("formulaireValues");
+    
 
-// convertir la chaine de caractere en objet Javascript
+const contenu = await response.json();
 
-const dataLocalStorageObject = JSON.parse(dataLocalStorage);
-
-
-// ----------------Fonction pour les maintenir les champs du Local Storage apres reactualisation--------
-
-
-function remplirChampsInputDepuisLocalStorage(input) {
-    document.querySelector(`#${input}`).value = dataLocalStorageObject[input];
+    
+if(response.ok){
+    console.log(`Resultat de response.ok: ${response.ok}`);
+}else {
+    console.log(`reponse du serveur : ${response.status}`);
+    alert(`Problème avec le serveur : erreur ${response.status}`);
+}
 }
 
-remplirChampsInputDepuisLocalStorage("nom");
-remplirChampsInputDepuisLocalStorage("prenom");
-remplirChampsInputDepuisLocalStorage("adresse");
-remplirChampsInputDepuisLocalStorage("ville");
-remplirChampsInputDepuisLocalStorage("codepostal");
-remplirChampsInputDepuisLocalStorage("email");
+catch(event){
+        console.log("Erreur qui vient du catch()");
+        console.log(event);
+        alert(`ERREUR qui vient du ${event}`);
+    }
+})
+
+// -------------AddEventListener Accolade-------------------------
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
