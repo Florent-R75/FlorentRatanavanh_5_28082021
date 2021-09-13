@@ -380,6 +380,53 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
 
         localStorage.setItem("contact", JSON.stringify(contact));
 
+        // -------------------
+        const promise01 = fetch("http://localhost:3000/api/teddies/order", {
+            method : "POST",
+            body: JSON.stringify({products, contact}),
+            headers:{
+                "Content-Type":"application/json",
+                "Accept":"application/json",
+            },
+        });
+        // -----------------
+
+        
+        
+        
+        //------------------------- Envoyer le formulaire et le produit sur le serveur.
+        
+        
+        // pour voir le resultat du serveur dans la console
+        
+        promise01.then(async(response)=>{
+           
+           
+        //    Si la promesse n'est pas résolu , il faut gérer l'erreur.
+           
+            try{
+        
+            
+        
+        const contenu = await response.json();
+        
+            
+        if(response.ok){
+            console.log(`Resultat de response.ok: ${response.ok}`);
+        }else {
+            console.log(`reponse du serveur : ${response.status}`);
+            alert(`Problème avec le serveur : erreur ${response.status}`);
+        }
+        }
+        
+        catch(event){
+                console.log("Erreur qui vient du catch()");
+                console.log(event);
+                alert(`ERREUR qui vient du ${event}`);
+            }
+        })
+
+
 
     } else {
         alert("Veuillez bien remplir le formulaire");
@@ -390,61 +437,19 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
     // -------------FIN Gestion de validation du Formulaire---------
 
 
-    // -------------Recuperer les id du panier-----------------------
+    // -------------AddEventListener Accolade-------------------------
+    });
+    
 
 
 
 
 
-    // --------REGROUPER le panier et le formulaire avant l'envoi au serveur----------
+   
 
     
 
-console.log(JSON.stringify({products, contact}));
 
-
-//------------------------- Envoyer le formulaire et le produit sur le serveur.
-
-const promise01 = fetch("http://localhost:3000/api/teddies/order", {
-    method : "POST",
-    body: JSON.stringify({products, contact}),
-    headers:{
-        "Content-Type":"application/json",
-        "Accept":"application/json",
-    },
-});
-
-// pour voir le resultat du serveur dans la console
-
-promise01.then(async(response)=>{
-   
-   
-//    Si la promesse n'est pas résolu , il faut gérer l'erreur.
-   
-    try{
-
-    
-
-const contenu = await response.json();
-
-    
-if(response.ok){
-    console.log(`Resultat de response.ok: ${response.ok}`);
-}else {
-    console.log(`reponse du serveur : ${response.status}`);
-    alert(`Problème avec le serveur : erreur ${response.status}`);
-}
-}
-
-catch(event){
-        console.log("Erreur qui vient du catch()");
-        console.log(event);
-        alert(`ERREUR qui vient du ${event}`);
-    }
-})
-
-// -------------AddEventListener Accolade-------------------------
-});
 
 
 
