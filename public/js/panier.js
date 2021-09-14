@@ -147,6 +147,10 @@ let prixTotalAffiche = prixTotalCalcul.reduce(reducer, 0);
 
 console.log(prixTotalAffiche);
 
+// Envoi du prix total dans le local storage
+
+localStorage.setItem("PrixTotal", JSON.stringify(prixTotalAffiche));
+
 // Le code HTML du code à afficher
 
 const affichagePrixTotal = `
@@ -410,9 +414,22 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
         
         const contenu = await response.json();
         
-            
+        
+        
         if(response.ok){
             console.log(`Resultat de response.ok: ${response.ok}`);
+            
+            // Recuperation de l'id de la response et envoi au Local Storage-------------
+            
+            
+            localStorage.setItem("responseId",contenu.orderId);
+
+            // Aller sur la page de confirmation-commande
+
+            window.location = "confirmation.html";
+            
+
+
         }else {
             console.log(`reponse du serveur : ${response.status}`);
             alert(`Problème avec le serveur : erreur ${response.status}`);

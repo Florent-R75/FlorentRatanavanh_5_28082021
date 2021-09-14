@@ -92,8 +92,7 @@ function showProduct(product) {
 
 
   // Style css
-
-  // image.style.height = "300px";
+  
   card.style.textDecoration = "none";
   colorsList.style.listStyle = "none";
 
