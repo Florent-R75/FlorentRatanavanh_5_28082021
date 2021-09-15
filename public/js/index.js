@@ -12,7 +12,7 @@ fetch("http://localhost:3000/api/teddies")
     }
   })
   .then(function (items) {
-    for ( index = 0; index < items.length; index++) {
+    for ( let index = 0; index < items.length; index++) {
       showProduct(items[index]);
       console.table(items[index]);
 
@@ -47,6 +47,8 @@ function showProduct(product) {
   const colorsList = document.createElement("ul");
   const colors = document.createElement("li");
   const stock = document.createElement("p");
+  
+  
 
   // Attribution de contenus
 
@@ -63,10 +65,10 @@ function showProduct(product) {
 
 
   // Attribution de classes
-;
+
   image.setAttribute("src", product.imageUrl);
   image.setAttribute("alt", product.description);
-  image.setAttribute("class", "card-img-top");
+  image.setAttribute("class", "img-thumbnail img-fluid");
   card.setAttribute("class", "col-12 col-sm-4 card text-white bg-primary");
 
   card.setAttribute("href", "produit.html?id=" + product._id);
@@ -92,7 +94,7 @@ function showProduct(product) {
 
 
   // Style css
-  
+  image.style.height = "255px"
   card.style.textDecoration = "none";
   colorsList.style.listStyle = "none";
 

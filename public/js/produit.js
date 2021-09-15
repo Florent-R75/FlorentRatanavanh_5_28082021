@@ -68,10 +68,10 @@ function showProduct(product) {
     heading.textContent = product.name;
     para.textContent = "Prix: "+product.price /100 + "€";
     description.textContent = product.description;
-    command.textContent = "Passer la commande et payer"
+    command.textContent = "Passer la commande "
     button.textContent = "Ajouter au panier";
     colors.textContent = product.colors;
-    label.textContent = "Choisissez une couleur";
+    label.textContent = "Choisissez une couleur:";
 
     // Evenements sur le bouton et ajout au LOCAL STORAGE
 
