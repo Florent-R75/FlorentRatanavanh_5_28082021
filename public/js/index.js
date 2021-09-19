@@ -1,25 +1,26 @@
-// utiliser fetch pour récupérer les produits.
-// reporter des erreurs eventuelles dans la récupération fetch
+// --------------------FETCH------------------------
 
-
-
+// 1) Utiliser fetch pour récupérer les produits.
+// 2 )Appeler la fonction showProduct pour l'affichage des elements
+// 3)reporter des erreurs eventuelles dans la récupération fetch
 
 
 fetch("http://localhost:3000/api/teddies")
   .then(function (response) {
     if (response.ok) {
       return response.json();
+      
+
     }
   })
   .then(function (items) {
-    for ( let index = 0; index < items.length; index++) {
+    for (let index = 0; index < items.length; index++) {
       showProduct(items[index]);
-      console.table(items[index]);
+
+
 
     }
   })
-
-
 
 
 
@@ -29,14 +30,22 @@ fetch("http://localhost:3000/api/teddies")
 
 
 
+// ------------------FIN DU FETCH---------------------------
 
 
-// Affiche un produit a l'interieur du <root> element>
+
+
+
+
+
+
+//--------CREATION DE LA FONCTION GLOBALE POUR AFFICHAGE------------ 
+
 
 function showProduct(product) {
-  
-  // Initialisation de variables
 
+  // Initialisation de variables
+const col = document.createElement("div");
   const card = document.createElement("a");
   const image = document.createElement("img");
   const cardbody = document.createElement("div");
@@ -44,11 +53,11 @@ function showProduct(product) {
   const heading = document.createElement("h2");
   const para = document.createElement("p");
   const description = document.createElement("p");
+  const stock = document.createElement("p");
   const colorsList = document.createElement("ul");
   const colors = document.createElement("li");
-  const stock = document.createElement("p");
-  
-  
+
+
 
   // Attribution de contenus
 
@@ -59,46 +68,50 @@ function showProduct(product) {
   colors.textContent = "Couleurs disponibles: " + product.colors;
 
 
-
-
-
-
-
   // Attribution de classes
 
   image.setAttribute("src", product.imageUrl);
   image.setAttribute("alt", product.description);
-  image.setAttribute("class", "img-thumbnail img-fluid");
-  card.setAttribute("class", "col-12 col-sm-4 card text-white bg-primary");
+  image.setAttribute("class", "card-img-top img-thumbnail rounded");
+  card.setAttribute("class", "card text-black mt-3 mb-3");
+  col.setAttribute("class", "col-12 col-sm-4");
 
   card.setAttribute("href", "produit.html?id=" + product._id);
   cardbody.setAttribute("class", "card-body");
   heading.setAttribute("class", "card-title");
   para.setAttribute("class", "card-text fw-bold fs-4");
   stock.setAttribute("class", "btn btn-success");
+  colorsList.setAttribute("class", "d-none");
 
-  // Attribution de noeuds NOEUD
+  
+  // Création du point d'injection du DOM
 
   let root = document.querySelector(".teddy");
 
-  root.appendChild(card);
 
+  // Injection HTML dans le DOM
+root.appendChild(col);
+  col.appendChild(card);
   card.appendChild(image);
   card.appendChild(cardbody);
   cardbody.appendChild(heading);
   cardbody.appendChild(description);
-  cardbody.appendChild(colorsList);
-  colorsList.appendChild(colors);
   cardbody.appendChild(para);
   cardbody.appendChild(stock);
+  cardbody.appendChild(colorsList);
+  colorsList.appendChild(colors);
 
 
   // Style css
-  image.style.height = "255px"
+
   card.style.textDecoration = "none";
   colorsList.style.listStyle = "none";
-
 }
+
+
+// ----------------FIN DE LA FONCTION D AFFICHAGE------------------------
+
+
 
 
 

@@ -6,14 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/style.css" />
-  <title>Site E-Commerce</title>
+  <title>Panier</title>
   <link rel="icon" type="image/svg+xml" href="node_modules/bootstrap-icons/icons/cart-check-fill.svg" />
 </head>
 
   <body>
     <!-- Navbar -->
 
-    <header class="bg-danger container">
+    <header class="bg-primary container">
       <h1 class="text-white text-center">Site e-commerce</h1>
   
       <nav class="navbar navbar-expand justify-content-center">
@@ -35,22 +35,28 @@
 
     <main class="container">
       <div class="row">
-        <div class="col">
-          
-            <legend id="root">Votre Panier</legend>
-            
-              <h1 class="card-title"></h1>
-              <p class="card-text" id="container-produits-panier">Récapitulatif Commande</p>
+          <div class="col-6 order-2 d-flex flex-column justify-content-between" id="positionElement5">
 
-              
+            <legend id="root" class="mt-4 text-center fw-bold">Récapitulatif de votre commande</legend>
+            
+            
+            
+            
             
 
+              <table class="table table-borderless" id="container-produits-panier">
+              </table>
             
-        </div>
+          </div>
+            
+            
+            
+            
+        
       </div>
     </main>
 
-    <footer class="bg-danger text-center container">
+    <footer class="bg-primary text-center container">
 
       <div class="row">
         

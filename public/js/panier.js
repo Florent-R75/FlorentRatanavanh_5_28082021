@@ -2,34 +2,30 @@
 
 let panier = JSON.parse(localStorage.getItem("panier"));
 
+// -----------------------AFfICHAGE DU PANIER-------------------
 
-// Assigner un index au panier
-
-
-
-// Extraire les objets du panier
-
-// -----------------------Affichage des produits du panier-------------------
 // Selection de la classe ou je vais injecter le code HTML
+
 
 const positionElement = document.querySelector("#container-produits-panier");
 
-console.log(positionElement);
 
 // Si le panier est vide, afficher le panier est vide
 
 if (panier === null || panier == 0) {
     const panierVide = `
-    <div class="container-panier-vide">
-    <div> le panier est vide </div>
+    <div class="container-panier-vide text-center fw-bold">
+    <div> Le panier est vide </div>
     </div>
     `;
     positionElement.innerHTML = panierVide;
+
+
 } else {
 
     // Si le panier n'est pas vide, afficher les produits du local storage
 
-    let structureProduitPanier = [];
+    let structureProduitPanier = "";
 
 
 
@@ -37,10 +33,13 @@ if (panier === null || panier == 0) {
 
         structureProduitPanier = structureProduitPanier + `
         
-        <div class="container-recapitulatif card">
-            <div class="card-title">Nom du Produit: ${panier[k].name}</div>
-            <div class="card-text">${panier[k].price / 100} € - <div><button class ="btn-supprimer btn btn-warning"> Supprimer </button>
-            </div></div>
+         <tbody">
+                <tr>
+                    <th>${panier[k].name}</th>
+                    <th class="text-center">${panier[k].price / 100} €</th>
+                </tr>
+            </tbody>
+        
             `;
 
 
@@ -52,60 +51,84 @@ if (panier === null || panier == 0) {
 
 }
 
-// ---------------FIN DE L AFFICHAGE DES PRODUITS-----------------
-
-// *************** Gestion du bouton supprimer l'article *********
-
-// Selectionner de tous les boutons  
-
-let btn_supprimer = document.querySelectorAll(".btn-supprimer");
-console.log(btn_supprimer);
-
-// seclection du bouton a supprimer
-
-for (let l = 0; l < btn_supprimer.length; l++) {
-    btn_supprimer[l].addEventListener("click", (event) => {
-        event.preventDefault();
+// ---------------FIN DE L AFFICHAGE DU PANIER-----------------
 
 
-        let id_selectionner_suppression = panier[l]._id;
-        console.log(id_selectionner_suppression);
 
-        // avec la methode filter je selectionne les elements a garder et je supprime le btn suppr a cliquer
+// ---------CREATION DE LA FONCTION POUR LE CALCUL DU PRIX TOTAL--------------
 
-        panier = panier.filter(el => el._id !== id_selectionner_suppression);
-        console.log(panier);
+    // Declaration de la variable pour contenir les prix du panier
 
-        // on envoie la variable dans le local storage
+let prixTotalCalcul = [];
 
-        localStorage.setItem("panier", JSON.stringify(panier));
+    // Aller chercher les prix dans le panier
 
 
-        // alert que le produit a ete supprime
 
-        alert("Vous êtes sur le point de supprimer ce produit du panier");
-        window.location.href = "panier.html";
-
-    });
+for (let m = 0; m < panier.length; m++) {
+    
+    let prixProduitDansLePanier = panier[m].price / 100;
+    prixTotalCalcul.push(prixProduitDansLePanier);
+    console.log(prixTotalCalcul)
 }
 
 
-//-------------------LE BTIN POUR SUPPRIMER TOUT LE PANIER  ----------------------
-// le code HTML pour le bouton
 
-const btn_tout_supprimer_panier_html = `
-<button class="btn-tout-supprimer-panier-html btn btn-danger"> Vider le panier </button>
+
+
+    // Additioner les prix du tableau avec la methode REDUCER et la mettre dans la variable "prixTotalAffiche"
+
+const reducer = (previousValue, currentValue) => previousValue + currentValue;
+
+let prixTotalAffiche = prixTotalCalcul.reduce(reducer, 0);
+
+console.log(prixTotalAffiche);
+
+    // Envoi du prix total dans le local storage
+
+localStorage.setItem("PrixTotal", JSON.stringify(prixTotalAffiche));
+
+    // Le code HTML du code à afficher
+
+const affichagePrixTotal = `
+
+<tbody class="table-bordered">
+    <tr>
+        <td class="bg-dark text-white">Prix Total</td>
+        <td class="text-center bg-dark text-white">${prixTotalAffiche} €</td>
+    </tr>
+
+</tbody>
+
+
+
 `;
 
-// Insertion du bouton dans le DOM
+    // Injection du HTML du total panier apres le dernier élément
 
-positionElement.insertAdjacentHTML("beforeend", btn_tout_supprimer_panier_html)
+positionElement.insertAdjacentHTML('beforeend', affichagePrixTotal);
 
-// Selectionner le bouton pour le javascript
+
+// ---------FIN DE LA FONCTION POUR LE CALCUL DU PRIX TOTAL--------------
+
+
+// ---------CREATION DU BOUTON "TOUT SUPPRIMER"
+
+    // le code HTML pour le bouton
+
+const btn_tout_supprimer_panier_html = `
+<div class="text-center mb-4 "><button class="btn-tout-supprimer-panier-html btn btn-danger mb-5 text-center"> Vider le panier </button></div>
+`;
+
+    // Insertion du bouton dans le DOM
+
+positionElement5.insertAdjacentHTML("beforeend", btn_tout_supprimer_panier_html)
+
+    // Selectionner le bouton pour le javascript
 
 const btn_tout_supprimer_panier_java = document.querySelector(".btn-tout-supprimer-panier-html");
 
-// suppression des produits au click
+    // suppression des produits au click
 
 btn_tout_supprimer_panier_java.addEventListener("click", (event) => {
     event.preventDefault();
@@ -116,57 +139,14 @@ btn_tout_supprimer_panier_java.addEventListener("click", (event) => {
 
 });
 
-// --------FIN Le bouton pour vider le panier--------------------
+    // --------FIN Le bouton pour vider le panier--------------------
 
-// ---------Le montant total du panier--------------
 
-// Declaration de la variable pour contenir les prix du panier
-
-let prixTotalCalcul = [];
-
-// Aller chercher les prix dans le panier
+    // -------------------FIN DU PANIER -----------------------
 
 
 
-for (let m = 0; m < panier.length; m++) {
-
-    let prixProduitDansLePanier = panier[m].price / 100;
-    prixTotalCalcul.push(prixProduitDansLePanier);
-    console.log(prixTotalCalcul)
-}
-
-
-
-
-
-// Additioner les prix du tableau avec la methode REDUCER et la mettre dans la variable "prixTotalAffiche"
-
-const reducer = (previousValue, currentValue) => previousValue + currentValue;
-
-let prixTotalAffiche = prixTotalCalcul.reduce(reducer, 0);
-
-console.log(prixTotalAffiche);
-
-// Envoi du prix total dans le local storage
-
-localStorage.setItem("PrixTotal", JSON.stringify(prixTotalAffiche));
-
-// Le code HTML du code à afficher
-
-const affichagePrixTotal = `
-<div class="affichage-prix-html"> Le prix total est de ${prixTotalAffiche} €</div>
-`;
-
-// Injection du HTML du total panier apres le dernier élément
-
-positionElement.insertAdjacentHTML('beforeend', affichagePrixTotal);
-
-
-// -------------------Fin du panier de commande-----------------------
-
-
-
-// --------------------CONSTRUIRE LE FORMULAIRE--------------------------
+    // --------------------CONSTRUIRE LE FORMULAIRE--------------------------
 
 
 const afficherFormulaireHtml = () => {
@@ -174,11 +154,11 @@ const afficherFormulaireHtml = () => {
 
     // Selectionner du DOM pour le position du formulaire
 
-    const positionElement2 = document.querySelector("#container-produits-panier");
+    const positionElement2 = document.querySelector("#positionElement5");
 
     const structureFormulaire = `
-    <div class="container">
-                  <legend>Veuillez remplir ce formulaire pour la commande</legend>
+    <div class="border border-dark mb-5 col-6 order-1">
+                  <legend class="text-center fw-bold mt-4">Veuillez remplir ce formulaire pour la commande</legend>
     
                   <div id="prixTotal" class="row">
                     <form method="POST" target="_blank" class="col">
@@ -206,9 +186,11 @@ const afficherFormulaireHtml = () => {
                       
                     </form>
     
-                    <button type="submit" class="btn btn-success" id="envoyerformulaire"  name="envoyer_le_formulaire">Passez la commande</button>
-                  </div>
-                
+                    </div>
+                    <div class="text-center">
+                    <button type="submit" class="btn btn-success mt-4 mb-4 text-center" id="envoyerformulaire"  name="envoyer_le_formulaire">Passer la commande</button>
+
+                </div>
               </div>
     `;
 
@@ -220,24 +202,27 @@ const afficherFormulaireHtml = () => {
 
 };
 
-// Affichage du Formulaire
+    // Affichage du Formulaire
 
 afficherFormulaireHtml();
 
-// Recuperation des donnees du formulaires
+  
 
-// Selection du btn pour envoyer le formulaire
+    // Selection du btn pour envoyer le formulaire
 
 const btnEnvoyerFormulaire = document.querySelector("#envoyerformulaire");
 
 
-// ---------AddEventListener-----------
 
-btnEnvoyerFormulaire.addEventListener('click', (e) => {
-    e.preventDefault();
+// ---------FIN DE LA CREATION DU FORMULAIRE----------------------
 
 
+// ---------CREATION DU BOUTON AddEventListener ET VALIDATION DES CHAMPS---------------------------------------
 
+
+
+
+btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
 
 
     // Recuperation des valeurs du formulaires
@@ -255,7 +240,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
     //--------------- Gestion Validation du formulaire------------------
 
 
-    // -------Factorisation de la condition dans une fonction
+    // -------Assignation de variables
 
     const alertOrigine = (value) => {
         return `${value} :Chiffres et symboles ne sont pas autorisés.\nMinimum 3 caractères, maximum 20 caractères.`
@@ -276,6 +261,10 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
 
     //---------------------- Controle de la validite du nom, prenom et ville
 
+    
+    // --------nom-------------
+    
+    
     function nomControle() {
 
 
@@ -306,7 +295,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
         }
 
     }
-    // ------------REGEX Adresse----------------
+    // ------------ Adresse----------------
 
     function adresseControle() {
 
@@ -323,7 +312,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
         }
 
     }
-    //-------------- Ville
+    //-------------- Ville-----------
 
 
     function villeControle() {
@@ -343,39 +332,39 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
 
     }
 
-  let products = panier.map(function(product){
-      return product._id
-  });
-
-  console.log(products);
-
-    // --------REGEXP Code Postal---------
-
-
     
-    // -------REGEXP Email------------------------
-
-
+    
+    
+    
     function emailControl() {
-
-
+        
+        
         const lemail = contact.email;
-
+        
         if (regExEmail(lemail)) {
-
+            
             return true;
-
+            
         } else {
-
-
+            
+            
             alert("Veuillez entrer une adresse mail valide!");
             return false;
         }
-
+        
     }
+    //------------------FIN DU CONTROLE INDIVIDUEL DES CHAMPS-----------------
+    
+    
+    // ----------------CONTROLE GENERALE DU FORMULAIRE AVANT ENVOI-------------
 
+    
+    let products = panier.map(function(product){
+        return product._id
+    });
+  
 
-
+    
 
 
     // Controler la validité du formulaire avant l'envoi
@@ -403,48 +392,45 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
         
         // pour voir le resultat du serveur dans la console
         
-        promise01.then(async(response)=>{
-           
-           
-        //    Si la promesse n'est pas résolu , il faut gérer l'erreur.
-           
-            try{
-        
-            
-        
-        const contenu = await response.json();
-        
-        
-        
-        if(response.ok){
-            console.log(`Resultat de response.ok: ${response.ok}`);
-            
-            // Recuperation de l'id de la response et envoi au Local Storage-------------
+            promise01.then(async(response)=>{
             
             
-            localStorage.setItem("responseId",contenu.orderId);
+                //    Si la promesse n'est pas résolu , il faut gérer l'erreur.
+            
+                try{
+            
+                
+            
+                    const contenu = await response.json();
+                
+                
+                
+                    if(response.ok){
+                    console.log(`Resultat de response.ok: ${response.ok}`);
+                    
+                    // Recuperation de l'id de la response et envoi au Local Storage-------------
+                    
+                    
+                    localStorage.setItem("responseId",contenu.orderId);
 
-            // Aller sur la page de confirmation-commande
+                    // Aller sur la page de confirmation-commande
 
-            window.location = "confirmation.html";
-            
+                    window.location = "confirmation.html";
+                    
 
 
-        }else {
-            console.log(`reponse du serveur : ${response.status}`);
-            alert(`Problème avec le serveur : erreur ${response.status}`);
-        }
-        }
-        
-        catch(event){
+                }else {
+                    console.log(`reponse du serveur : ${response.status}`);
+                    alert(`Problème avec le serveur : erreur ${response.status}`);
+                }
+                            
+            }    
+            catch(event){
                 console.log("Erreur qui vient du catch()");
                 console.log(event);
                 alert(`ERREUR qui vient du ${event}`);
             }
         })
-
-
-
     } else {
         alert("Veuillez bien remplir le formulaire");
     }
@@ -454,8 +440,8 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => {
     // -------------FIN Gestion de validation du Formulaire---------
 
 
-    // -------------AddEventListener Accolade-------------------------
-    });
+    
+});
     
 
 
