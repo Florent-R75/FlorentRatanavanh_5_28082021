@@ -6,9 +6,7 @@ let panier = JSON.parse(localStorage.getItem("panier"));
 
 // Selection de la classe ou je vais injecter le code HTML
 
-
 const positionElement = document.querySelector("#container-produits-panier");
-
 
 // Si le panier est vide, afficher le panier est vide
 
@@ -20,40 +18,26 @@ if (panier === null || panier == 0) {
     `;
     positionElement.innerHTML = panierVide;
 
-
 } else {
-
     // Si le panier n'est pas vide, afficher les produits du local storage
-
     let structureProduitPanier = "";
-
-
-
     for (k = 0; k < panier.length; k++) {
-
         structureProduitPanier = structureProduitPanier + `
-        
          <tbody">
                 <tr>
                     <th>${panier[k].name}</th>
                     <th class="text-center">${panier[k].price / 100} €</th>
                 </tr>
             </tbody>
-        
-            `;
-
-
+        `;
     }
 
     if (k === panier.length) {
         positionElement.innerHTML = structureProduitPanier;
     }
 
-}
-
+};
 // ---------------FIN DE L AFFICHAGE DU PANIER-----------------
-
-
 
 // ---------CREATION DE LA FONCTION POUR LE CALCUL DU PRIX TOTAL--------------
 
@@ -63,26 +47,18 @@ let prixTotalCalcul = [];
 
     // Aller chercher les prix dans le panier
 
-
-
 for (let m = 0; m < panier.length; m++) {
     
     let prixProduitDansLePanier = panier[m].price / 100;
     prixTotalCalcul.push(prixProduitDansLePanier);
     console.log(prixTotalCalcul)
-}
-
-
-
-
+};
 
     // Additioner les prix du tableau avec la methode REDUCER et la mettre dans la variable "prixTotalAffiche"
 
 const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
 let prixTotalAffiche = prixTotalCalcul.reduce(reducer, 0);
-
-console.log(prixTotalAffiche);
 
     // Envoi du prix total dans le local storage
 
@@ -91,38 +67,31 @@ localStorage.setItem("PrixTotal", JSON.stringify(prixTotalAffiche));
     // Le code HTML du code à afficher
 
 const affichagePrixTotal = `
-
-<tbody class="table-bordered">
-    <tr>
-        <td class="bg-dark text-white">Prix Total</td>
-        <td class="text-center bg-dark text-white">${prixTotalAffiche} €</td>
-    </tr>
-
-</tbody>
-
-
-
+    <tbody class="table-bordered">
+        <tr>
+            <td class="bg-dark text-white">Prix Total</td>
+            <td class="text-center bg-dark text-white">${prixTotalAffiche} €</td>
+        </tr>
+    </tbody>
 `;
 
     // Injection du HTML du total panier apres le dernier élément
 
 positionElement.insertAdjacentHTML('beforeend', affichagePrixTotal);
 
-
 // ---------FIN DE LA FONCTION POUR LE CALCUL DU PRIX TOTAL--------------
-
 
 // ---------CREATION DU BOUTON "TOUT SUPPRIMER"
 
     // le code HTML pour le bouton
 
 const btn_tout_supprimer_panier_html = `
-<div class="text-center mb-4 "><button class="btn-tout-supprimer-panier-html btn btn-danger mb-5 text-center"> Vider le panier </button></div>
+    <div class="text-center mb-4 "><button class="btn-tout-supprimer-panier-html btn btn-danger mb-5 text-center"> Vider le panier </button></div>
 `;
 
     // Insertion du bouton dans le DOM
 
-positionElement5.insertAdjacentHTML("beforeend", btn_tout_supprimer_panier_html)
+positionElement5.insertAdjacentHTML("beforeend", btn_tout_supprimer_panier_html);
 
     // Selectionner le bouton pour le javascript
 
@@ -138,89 +107,62 @@ btn_tout_supprimer_panier_java.addEventListener("click", (event) => {
     window.location.href = "panier.html";
 
 });
-
     // --------FIN Le bouton pour vider le panier--------------------
-
 
     // -------------------FIN DU PANIER -----------------------
 
-
-
     // --------------------CONSTRUIRE LE FORMULAIRE--------------------------
-
 
 const afficherFormulaireHtml = () => {
 
-
     // Selectionner du DOM pour le position du formulaire
 
-    const positionElement2 = document.querySelector("#positionElement5");
+const positionElement2 = document.querySelector("#positionElement5");
 
-    const structureFormulaire = `
-    <div class="border border-dark mb-5 col-6 order-1">
-                  <legend class="text-center fw-bold mt-4">Veuillez remplir ce formulaire pour la commande</legend>
+    // Initialisation de la constante contenant le HTML------------
+const structureFormulaire = `
+    <div class="mb-5 col-6 order-1">
+        <legend class="text-center fw-bold mt-4">Veuillez remplir ce formulaire pour la commande</legend>
     
-                  <div id="prixTotal" class="row">
-                    <form method="POST" target="_blank" class="col">
-                      <label for="nom" class="form-label">Nom:</label>
-                      <input type="text" name="nom" id="nom" class="form-control" required>
-                    
-    
-                    
-                      <label for="prenom"class="form-label">Prenom:</label>
-                      <input type="text" name="prenom" id="prenom" class="form-control" required>
-                    
-    
-                    
-                      <label for="adresse" class="form-label">Adresse de livraison</label>
-                      <textarea type="text" name="Adresse de livraison" class="form-control" id="adresse" required></textarea>
-                    
-                      <label for="ville" class="form-label">Ville</label>
-                      <input type="text" name="Ville" id="ville" class="form-control" required>
-                    
-                      
-    
-                      <label for="email" class="form-label">Email</label>
-                      <input type="text" name="Email" id="email" class="form-control" required> 
-                    
-                      
-                    </form>
-    
-                    </div>
-                    <div class="text-center">
-                    <button type="submit" class="btn btn-success mt-4 mb-4 text-center" id="envoyerformulaire"  name="envoyer_le_formulaire">Passer la commande</button>
+        <div id="prixTotal" class="row">
+            <form method="POST" target="_blank" class="col">
+                <label for="nom" class="form-label">Nom:</label>
+                <input type="text" name="nom" id="nom" class="form-control" required>
 
-                </div>
-              </div>
+                <label for="prenom"class="form-label">Prenom:</label>
+                <input type="text" name="prenom" id="prenom" class="form-control" required>
+            
+                <label for="adresse" class="form-label">Adresse de livraison</label>
+                <textarea type="text" name="Adresse de livraison" class="form-control" id="adresse" required></textarea>
+            
+                <label for="ville" class="form-label">Ville</label>
+                <input type="text" name="Ville" id="ville" class="form-control" required>
+            
+                <label for="email" class="form-label">Email</label>
+                <input type="text" name="Email" id="email" class="form-control" required> 
+            </form>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success mt-4 mb-4 text-center" id="envoyerformulaire"  name="envoyer_le_formulaire">Passer la commande</button>
+        </div>
+    </div>
     `;
-
-
     // Injection du code HTML
 
     positionElement2.insertAdjacentHTML("afterend", structureFormulaire);
-
-
 };
 
-    // Affichage du Formulaire
+    // Appel de la fonction ffichage du Formulaire
 
 afficherFormulaireHtml();
-
-  
 
     // Selection du btn pour envoyer le formulaire
 
 const btnEnvoyerFormulaire = document.querySelector("#envoyerformulaire");
 
-
-
 // ---------FIN DE LA CREATION DU FORMULAIRE----------------------
 
-
 // ---------CREATION DU BOUTON AddEventListener ET VALIDATION DES CHAMPS---------------------------------------
-
-
-
 
 btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
 
@@ -232,41 +174,33 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
         lastName: document.querySelector("#prenom").value,
         address: document.querySelector("#adresse").value,
         city: document.querySelector("#ville").value,
-        
         email: document.querySelector("#email").value,
     }
-
-
     //--------------- Gestion Validation du formulaire------------------
-
 
     // -------Assignation de variables
 
     const alertOrigine = (value) => {
         return `${value} :Chiffres et symboles ne sont pas autorisés.\nMinimum 3 caractères, maximum 20 caractères.`
-    }
+    };
 
     const regExPrenomNomVille = (value) => {
         return /^([A-Za-z\s]{3,20})?([-]{0,1})?(([A-Za-z\s]{3,20}))$/.test(value);
-    }
-
+    };
     
     const regExEmail = (value) => {
         return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
-    }
+    };
 
     const regExAdresse = (value) => {
         return /^[A-Za-z0-9\s]{5,50}$/.test(value);
-    }
+    };
 
     //---------------------- Controle de la validite du nom, prenom et ville
-
     
     // --------nom-------------
     
-    
     function nomControle() {
-
 
         const leNom = contact.firstName;
         if (regExPrenomNomVille(leNom)) {
@@ -277,7 +211,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
             return false;
         }
 
-    }
+    };
     // ---------prenom--------------
 
 
@@ -286,7 +220,6 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
 
         const lePrenom = contact.lastName;
         if (regExPrenomNomVille(lePrenom)) {
-
             return true;
 
         } else {
@@ -294,78 +227,54 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
             return false;
         }
 
-    }
+    };
     // ------------ Adresse----------------
 
     function adresseControle() {
 
-
         const ladresse = contact.address;
         
         if (regExAdresse(ladresse)) {
-
             return true;
 
         } else {
             alert("L'adresse doit contenir au minimum 3 caractères et maximum 50 caractères.");
             return false;
         }
-
-    }
+    };
     //-------------- Ville-----------
 
 
     function villeControle() {
 
-
         const laVille = contact.city;
         if (regExPrenomNomVille(laVille)) {
-
             return true;
 
         } else {
-
-
             alert(alertOrigine("VILLE"));
             return false;
         }
+    };
 
-    }
-
-    
-    
-    
-    
     function emailControl() {
-        
         
         const lemail = contact.email;
         
         if (regExEmail(lemail)) {
-            
             return true;
-            
         } else {
-            
-            
             alert("Veuillez entrer une adresse mail valide!");
             return false;
         }
-        
-    }
+    };
     //------------------FIN DU CONTROLE INDIVIDUEL DES CHAMPS-----------------
     
-    
     // ----------------CONTROLE GENERALE DU FORMULAIRE AVANT ENVOI-------------
-
     
     let products = panier.map(function(product){
         return product._id
     });
-  
-
-    
-
 
     // Controler la validité du formulaire avant l'envoi
 
@@ -382,48 +291,29 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
                 "Accept":"application/json",
             },
         });
-        // -----------------
-
-        
-        
-        
-        //------------------------- Envoyer le formulaire et le produit sur le serveur.
-        
-        
-        // pour voir le resultat du serveur dans la console
-        
+            
+            //------------------------- Envoyer le formulaire et le produit sur le serveur.
+            
             promise01.then(async(response)=>{
-            
-            
+                
+            // pour voir le resultat du serveur dans la console
+            try{
+                const contenu = await response.json();
+                
                 //    Si la promesse n'est pas résolu , il faut gérer l'erreur.
-            
-                try{
-            
-                
-            
-                    const contenu = await response.json();
-                
-                
-                
-                    if(response.ok){
+                if(response.ok){
                     console.log(`Resultat de response.ok: ${response.ok}`);
-                    
+                        
                     // Recuperation de l'id de la response et envoi au Local Storage-------------
-                    
-                    
                     localStorage.setItem("responseId",contenu.orderId);
 
                     // Aller sur la page de confirmation-commande
-
                     window.location = "confirmation.html";
-                    
-
 
                 }else {
                     console.log(`reponse du serveur : ${response.status}`);
                     alert(`Problème avec le serveur : erreur ${response.status}`);
                 }
-                            
             }    
             catch(event){
                 console.log("Erreur qui vient du catch()");
@@ -434,13 +324,6 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
     } else {
         alert("Veuillez bien remplir le formulaire");
     }
-
-
-
-    // -------------FIN Gestion de validation du Formulaire---------
-
-
-    
 });
     
 
