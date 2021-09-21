@@ -52,9 +52,9 @@ function showProduct(product) {
 
   image.setAttribute("src", product.imageUrl);
   image.setAttribute("alt", product.description);
-  image.setAttribute("class", "card-img-top img-thumbnail rounded");
+  image.setAttribute("class", "card-img-top rounded img-index");
   card.setAttribute("class", "card text-black mt-3 mb-3");
-  col.setAttribute("class", "col-12 col-md-6");
+  col.setAttribute("class", "col-12-xs col-xl-4 col-md-6");
   frame.setAttribute("class", "frame d-flex");
   card.setAttribute("href", "produit.html?id=" + product._id);
   cardbody.setAttribute("class", "card-body");
@@ -86,4 +86,6 @@ function showProduct(product) {
   colorsList.style.listStyle = "none";
   // frame.style.height="210px";
   // frame.style.width="290px";
+  
+  image.style.objectFit="cover";
 };

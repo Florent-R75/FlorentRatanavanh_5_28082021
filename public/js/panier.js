@@ -12,8 +12,8 @@ const positionElement = document.querySelector("#container-produits-panier");
 
 if (panier === null || panier == 0) {
     const panierVide = `
-    <div class="container-panier-vide text-center fw-bold">
-    <div> Le panier est vide </div>
+    <div class="container-panier-vide container text-center fw-bold">
+    <div class="row"> Le panier est vide </div>
     </div>
     `;
     positionElement.innerHTML = panierVide;
@@ -25,8 +25,8 @@ if (panier === null || panier == 0) {
         structureProduitPanier = structureProduitPanier + `
          <tbody">
                 <tr>
-                    <th>${panier[k].name}</th>
-                    <th class="text-center">${panier[k].price / 100} €</th>
+                    <th class="fw-normal">${panier[k].name}</th>
+                    <th class="text-center fw-normal">${panier[k].price / 100} €</th>
                 </tr>
             </tbody>
         `;
@@ -35,6 +35,7 @@ if (panier === null || panier == 0) {
     if (k === panier.length) {
         positionElement.innerHTML = structureProduitPanier;
     }
+
 
 };
 // ---------------FIN DE L AFFICHAGE DU PANIER-----------------
@@ -69,8 +70,8 @@ localStorage.setItem("PrixTotal", JSON.stringify(prixTotalAffiche));
 const affichagePrixTotal = `
     <tbody class="table-bordered">
         <tr>
-            <td class="bg-dark text-white">Prix Total</td>
-            <td class="text-center bg-dark text-white">${prixTotalAffiche} €</td>
+            <td class="fw-bold text-black rounded">Prix Total</td>
+            <td class="text-center fw-bold  text-black">${prixTotalAffiche} €</td>
         </tr>
     </tbody>
 `;
@@ -121,7 +122,7 @@ const positionElement2 = document.querySelector("#positionElement5");
 
     // Initialisation de la constante contenant le HTML------------
 const structureFormulaire = `
-    <div class="mb-5 col-lg-6 col-md-12 order-1">
+    <div class="mb-5 col-md-6 col-sm-12 order-1">
         <legend class="text-center fw-bold mt-4">Veuillez remplir ce formulaire pour la commande</legend>
     
         <div id="prixTotal" class="row">
