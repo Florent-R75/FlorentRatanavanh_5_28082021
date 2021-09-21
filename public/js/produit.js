@@ -71,7 +71,7 @@ function showProduct(product) {
     heading.textContent = product.name;
     para.textContent = "Prix: " + product.price / 100 + "€";
     description.textContent = product.description;
-    lien.textContent = "Passer la commande "
+    lien.textContent = "Commander "
     button.textContent = "Ajouter au panier";
     colors.textContent = product.colors;
     label.textContent = "Choisissez une couleur:";
@@ -98,19 +98,19 @@ function showProduct(product) {
     card.setAttribute("class", "card-body");
 
     card.setAttribute("href", "produit.html?id=" + product._id);
-    cardbody.setAttribute("class", "");
+    cardbody.setAttribute("class", "d-flex justify-content-between");
     heading.setAttribute("class", "card-title");
     para.setAttribute("class", "card-text fw-bold fs-4 mt-3");
     label.setAttribute("for", "color-select");
 
     label.setAttribute("class", "mb-2 fw-bold");
     colorsList.setAttribute("id", "color-select");
-    colorsList.setAttribute("class", "form-select w-25");
+    colorsList.setAttribute("class", "form-select");
     lien.setAttribute("href", "panier.html");
-    lien.setAttribute("class", "btn btn-warning ml-2 w-25 float-right")
+    lien.setAttribute("class", "btn btn-warning ml-2")
 
-    // command.setAttribute("class", "btn btn-warning mb-2 w-25");
-    button.setAttribute("class", "btn btn-success w-25");
+    
+    button.setAttribute("class", "btn btn-success ");
 
     // Ciblage du noeud HTML
 
@@ -131,7 +131,7 @@ function showProduct(product) {
     card.appendChild(cardbody);
     cardbody.appendChild(button);
     cardbody.appendChild(lien);
-    // lien.appendChild(command);
+    
 
 }
 
