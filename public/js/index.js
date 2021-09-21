@@ -54,7 +54,7 @@ function showProduct(product) {
   image.setAttribute("alt", product.description);
   image.setAttribute("class", "card-img-top img-thumbnail rounded");
   card.setAttribute("class", "card text-black mt-3 mb-3");
-  col.setAttribute("class", "col-12 col-sm-4");
+  col.setAttribute("class", "col-12 col-md-6");
   frame.setAttribute("class", "frame d-flex");
   card.setAttribute("href", "produit.html?id=" + product._id);
   cardbody.setAttribute("class", "card-body");

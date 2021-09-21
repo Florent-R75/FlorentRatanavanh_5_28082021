@@ -86,7 +86,7 @@ positionElement.insertAdjacentHTML('beforeend', affichagePrixTotal);
     // le code HTML pour le bouton
 
 const btn_tout_supprimer_panier_html = `
-    <div class="text-center mb-4 "><button class="btn-tout-supprimer-panier-html btn btn-danger mb-5 text-center"> Vider le panier </button></div>
+    <div class="text-center mb-4 "><button class="btn-tout-supprimer-panier-html btn btn-warning mb-5 text-center"> Vider le panier </button></div>
 `;
 
     // Insertion du bouton dans le DOM
