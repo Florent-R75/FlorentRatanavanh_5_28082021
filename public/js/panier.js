@@ -121,24 +121,24 @@ const positionElement2 = document.querySelector("#positionElement5");
 
     // Initialisation de la constante contenant le HTML------------
 const structureFormulaire = `
-    <div class="mb-5 col-6 order-1">
+    <div class="mb-5 col-lg-6 col-md-12 order-1">
         <legend class="text-center fw-bold mt-4">Veuillez remplir ce formulaire pour la commande</legend>
     
         <div id="prixTotal" class="row">
             <form method="POST" target="_blank" class="col">
-                <label for="nom" class="form-label">Nom:</label>
+                <label for="nom" class="form-label">Nom</label>
                 <input type="text" name="nom" id="nom" class="form-control" required>
 
-                <label for="prenom"class="form-label">Prenom:</label>
+                <label for="prenom"class="form-label mt-2">Prenom</label>
                 <input type="text" name="prenom" id="prenom" class="form-control" required>
             
-                <label for="adresse" class="form-label">Adresse de livraison</label>
+                <label for="adresse" class="form-label mt-2">Adresse de livraison</label>
                 <textarea type="text" name="Adresse de livraison" class="form-control" id="adresse" required></textarea>
             
-                <label for="ville" class="form-label">Ville</label>
+                <label for="ville" class="form-label mt-2">Ville</label>
                 <input type="text" name="Ville" id="ville" class="form-control" required>
             
-                <label for="email" class="form-label">Email</label>
+                <label for="email" class="form-label mt-2">Email</label>
                 <input type="text" name="Email" id="email" class="form-control" required> 
             </form>
         </div>

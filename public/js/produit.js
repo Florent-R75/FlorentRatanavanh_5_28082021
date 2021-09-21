@@ -48,7 +48,7 @@ function showProduct(product) {
     const colorsList = document.createElement("select");
     const colors = document.createElement("option");
     const button = document.createElement("button");
-    const command = document.createElement('button');
+    // const command = document.createElement('button');
     const lien = document.createElement('a');
     const optionQuantite = product.colors;
     let structureOptions = "";
@@ -71,7 +71,7 @@ function showProduct(product) {
     heading.textContent = product.name;
     para.textContent = "Prix: " + product.price / 100 + "€";
     description.textContent = product.description;
-    command.textContent = "Passer la commande "
+    lien.textContent = "Passer la commande "
     button.textContent = "Ajouter au panier";
     colors.textContent = product.colors;
     label.textContent = "Choisissez une couleur:";
@@ -95,10 +95,10 @@ function showProduct(product) {
     image.setAttribute("src", product.imageUrl);
     image.setAttribute("alt", product.description);
     image.setAttribute("class", "img-thumbnail rounded mx-auto");
-    card.setAttribute("class", "col");
+    card.setAttribute("class", "card-body");
 
     card.setAttribute("href", "produit.html?id=" + product._id);
-    cardbody.setAttribute("class", "card-body");
+    cardbody.setAttribute("class", "");
     heading.setAttribute("class", "card-title");
     para.setAttribute("class", "card-text fw-bold fs-4 mt-3");
     label.setAttribute("for", "color-select");
@@ -107,31 +107,31 @@ function showProduct(product) {
     colorsList.setAttribute("id", "color-select");
     colorsList.setAttribute("class", "form-select w-25");
     lien.setAttribute("href", "panier.html");
-    lien.setAttribute("class", "text-decoration-none")
+    lien.setAttribute("class", "btn btn-warning ml-2 w-25 float-right")
 
-    command.setAttribute("class", "btn btn-warning d-block mb-2 w-25");
-    button.setAttribute("class", "btn btn-success mb-3 w-25");
+    // command.setAttribute("class", "btn btn-warning mb-2 w-25");
+    button.setAttribute("class", "btn btn-success w-25");
 
     // Ciblage du noeud HTML
 
-    let root = document.querySelector(".teddy");
-
+    let positionElement = document.querySelector(".positionElement");
+    let positionElement2 = document.querySelector(".positionElement2");
     // Injection des elements HTML dans le DOM
 
-    root.appendChild(card);
-
-    card.appendChild(image);
-    card.appendChild(cardbody);
-    cardbody.appendChild(heading);
-    cardbody.appendChild(description);
-    cardbody.appendChild(label);
-    cardbody.appendChild(colorsList);
-    cardbody.appendChild(para);
-
+    positionElement.appendChild(image);
+    positionElement2.appendChild(card)
+    
+    card.appendChild(heading);
+    card.appendChild(description);
+    card.appendChild(label);
+    card.appendChild(colorsList);
+    card.appendChild(para);
+    
     colorsList.innerHTML = structureOptions;
+    card.appendChild(cardbody);
     cardbody.appendChild(button);
     cardbody.appendChild(lien);
-    lien.appendChild(command);
+    // lien.appendChild(command);
 
 }
 
