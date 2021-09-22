@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
- 
+ @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
 
 
 
@@ -110,21 +110,15 @@ body {
   border:1px solid rgb(242, 239, 239);
 }
 
+
+
 @media screen and (min-width:0) and (max-width:407px)  {
   .img-index{
-    height: 270px ;
-    object-fit: contain;
+    object-fit: cover;
   }
-  
-}
+} 
 
-@media screen and (min-width:407px) and (max-width:576px)  {
-  .img-index{
-    height: 370px ;
-    
-  }
-  
-}
+
 @media screen and (min-width:576px) and (max-width:768px)  {
   .img-index{
     height: 390px ;

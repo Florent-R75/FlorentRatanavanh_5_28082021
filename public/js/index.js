@@ -84,8 +84,5 @@ function showProduct(product) {
 
   card.style.textDecoration = "none";
   colorsList.style.listStyle = "none";
-  // frame.style.height="210px";
-  // frame.style.width="290px";
   
-  image.style.objectFit="cover";
-};
+}

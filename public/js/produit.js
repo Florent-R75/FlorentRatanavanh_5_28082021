@@ -48,7 +48,6 @@ function showProduct(product) {
     const colorsList = document.createElement("select");
     const colors = document.createElement("option");
     const button = document.createElement("button");
-    // const command = document.createElement('button');
     const lien = document.createElement('a');
     const optionQuantite = product.colors;
     let structureOptions = "";

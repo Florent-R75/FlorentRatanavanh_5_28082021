@@ -12,8 +12,8 @@ const positionElement = document.querySelector("#container-produits-panier");
 
 if (panier === null || panier == 0) {
     const panierVide = `
-    <div class="container-panier-vide container text-center fw-bold">
-    <div class="row"> Le panier est vide </div>
+    <div class="container-panier-vide text-center fw-bold">
+    <div class="text-center"> Le panier est vide </div>
     </div>
     `;
     positionElement.innerHTML = panierVide;
@@ -21,23 +21,26 @@ if (panier === null || panier == 0) {
 } else {
     // Si le panier n'est pas vide, afficher les produits du local storage
     let structureProduitPanier = "";
-    for (k = 0; k < panier.length; k++) {
+    
+    for (let item of panier) {
         structureProduitPanier = structureProduitPanier + `
-         <tbody">
+         <tbody>
                 <tr>
-                    <th class="fw-normal">${panier[k].name}</th>
-                    <th class="text-center fw-normal">${panier[k].price / 100} €</th>
+                    <td class="fw-normal">`+item.name+`</td>
+                    <td class="text-center fw-normal">`+item.price / 100+` €</td>
                 </tr>
-            </tbody>
+        </tbody>
         `;
+    
+
+     
     }
+    
+    positionElement.innerHTML = structureProduitPanier;
+    
 
-    if (k === panier.length) {
-        positionElement.innerHTML = structureProduitPanier;
-    }
 
-
-};
+}
 // ---------------FIN DE L AFFICHAGE DU PANIER-----------------
 
 // ---------CREATION DE LA FONCTION POUR LE CALCUL DU PRIX TOTAL--------------
@@ -48,12 +51,12 @@ let prixTotalCalcul = [];
 
     // Aller chercher les prix dans le panier
 
-for (let m = 0; m < panier.length; m++) {
+for (let item of panier) {
     
-    let prixProduitDansLePanier = panier[m].price / 100;
+    let prixProduitDansLePanier =item.price / 100;
     prixTotalCalcul.push(prixProduitDansLePanier);
     console.log(prixTotalCalcul)
-};
+}
 
     // Additioner les prix du tableau avec la methode REDUCER et la mettre dans la variable "prixTotalAffiche"
 
@@ -153,6 +156,8 @@ const structureFormulaire = `
     positionElement2.insertAdjacentHTML("afterend", structureFormulaire);
 };
 
+// -------------FIN D INITIALISATION DE LA CONSTANTE--------------
+
     // Appel de la fonction ffichage du Formulaire
 
 afficherFormulaireHtml();
@@ -212,7 +217,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
             return false;
         }
 
-    };
+    }
     // ---------prenom--------------
 
 
@@ -228,7 +233,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
             return false;
         }
 
-    };
+    }
     // ------------ Adresse----------------
 
     function adresseControle() {
@@ -242,7 +247,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
             alert("L'adresse doit contenir au minimum 3 caractères et maximum 50 caractères.");
             return false;
         }
-    };
+    }
     //-------------- Ville-----------
 
 
@@ -256,7 +261,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
             alert(alertOrigine("VILLE"));
             return false;
         }
-    };
+    }
 
     function emailControl() {
         
@@ -268,7 +273,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
             alert("Veuillez entrer une adresse mail valide!");
             return false;
         }
-    };
+    }
     //------------------FIN DU CONTROLE INDIVIDUEL DES CHAMPS-----------------
     
     // ----------------CONTROLE GENERALE DU FORMULAIRE AVANT ENVOI-------------
