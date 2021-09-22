@@ -12,8 +12,8 @@ fetch("http://localhost:3000/api/teddies")
   })
 
   .then(function (items) {
-    for (let index = 0; index < items.length; index++) {
-      showProduct(items[index]);
+    for (let product of items) {
+      showProduct(product);
     }
   })
 
