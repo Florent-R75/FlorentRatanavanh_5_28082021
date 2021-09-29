@@ -7,6 +7,7 @@ let panier = JSON.parse(localStorage.getItem("panier"));
 // Selection de la classe ou je vais injecter le code HTML
 
 const positionElement = document.querySelector("#container-produits-panier");
+const positionElement2 = document.querySelector("#positionElement2");
 
 // Si le panier est vide, afficher le panier est vide
 
@@ -19,6 +20,24 @@ if (panier === null || panier == 0) {
     positionElement.innerHTML = panierVide;
 
 } else {
+    const structureTableau =`
+    <legend class="mt-4 text-center fw-bold">Votre panier</legend>
+    <table class="table" id="tableRoot">
+        <thead>
+            <tr>
+                <th scope="col">Article</th>
+                <th scope="col" class="text-center">Prix</th>
+            </tr>
+        </thead>
+    </table>
+    `;
+
+    positionElement2.innerHTML= structureTableau;
+
+    const positionElement3 = document.querySelector("#tableRoot");
+    
+    
+    
     // Si le panier n'est pas vide, afficher les produits du local storage
     let structureProduitPanier = "";
     
@@ -31,25 +50,24 @@ if (panier === null || panier == 0) {
                 </tr>
         </tbody>
         `;
-    
-
-     
     }
     
-    positionElement.innerHTML = structureProduitPanier;
-    
-
+    positionElement3.insertAdjacentHTML("beforeend",structureProduitPanier);
 
 }
 // ---------------FIN DE L AFFICHAGE DU PANIER-----------------
 
 // ---------CREATION DE LA FONCTION POUR LE CALCUL DU PRIX TOTAL--------------
 
-    // Declaration de la variable pour contenir les prix du panier
+// Extraction du point noeud HTML-----------
+
+const positionElement3 = document.querySelector("#tableRoot");
+
+// Declaration de la variable pour contenir les prix du panier
 
 let prixTotalCalcul = [];
 
-    // Aller chercher les prix dans le panier
+// Aller chercher les prix dans le panier
 
 for (let item of panier) {
     
@@ -81,27 +99,27 @@ const affichagePrixTotal = `
 
     // Injection du HTML du total panier apres le dernier élément
 
-positionElement.insertAdjacentHTML('beforeend', affichagePrixTotal);
+positionElement3.insertAdjacentHTML('beforeend', affichagePrixTotal);
 
 // ---------FIN DE LA FONCTION POUR LE CALCUL DU PRIX TOTAL--------------
 
 // ---------CREATION DU BOUTON "TOUT SUPPRIMER"
 
-    // le code HTML pour le bouton
+// le code HTML pour le bouton
 
 const btn_tout_supprimer_panier_html = `
     <div class="text-center mb-4 "><button class="btn-tout-supprimer-panier-html btn btn-warning mb-5 text-center"> Vider le panier </button></div>
 `;
 
-    // Insertion du bouton dans le DOM
+// Insertion du bouton dans le DOM
 
-positionElement5.insertAdjacentHTML("beforeend", btn_tout_supprimer_panier_html);
+positionElement2.insertAdjacentHTML("beforeend", btn_tout_supprimer_panier_html);
 
-    // Selectionner le bouton pour le javascript
+// Selectionner le bouton pour le javascript
 
 const btn_tout_supprimer_panier_java = document.querySelector(".btn-tout-supprimer-panier-html");
 
-    // suppression des produits au click
+// suppression des produits au click
 
 btn_tout_supprimer_panier_java.addEventListener("click", (event) => {
     event.preventDefault();
@@ -121,9 +139,9 @@ const afficherFormulaireHtml = () => {
 
     // Selectionner du DOM pour le position du formulaire
 
-const positionElement2 = document.querySelector("#positionElement5");
 
-    // Initialisation de la constante contenant le HTML------------
+
+// Initialisation de la constante contenant le HTML------------
 const structureFormulaire = `
     <div class="mb-5 col-md-6 col-sm-12 order-1">
         <legend class="text-center fw-bold mt-4">Veuillez remplir ce formulaire pour la commande</legend>
@@ -158,11 +176,11 @@ const structureFormulaire = `
 
 // -------------FIN D INITIALISATION DE LA CONSTANTE--------------
 
-    // Appel de la fonction ffichage du Formulaire
+// Appel de la fonction ffichage du Formulaire
 
 afficherFormulaireHtml();
 
-    // Selection du btn pour envoyer le formulaire
+// Selection du noeud HTML pour envoyer le formulaire
 
 const btnEnvoyerFormulaire = document.querySelector("#envoyerformulaire");
 

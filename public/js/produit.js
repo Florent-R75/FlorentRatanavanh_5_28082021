@@ -46,7 +46,6 @@ function showProduct(product) {
     const description = document.createElement("p");
     const label = document.createElement('label');
     const colorsList = document.createElement("select");
-    const colors = document.createElement("option");
     const button = document.createElement("button");
     const lien = document.createElement('a');
     const optionQuantite = product.colors;
@@ -72,7 +71,6 @@ function showProduct(product) {
     description.textContent = product.description;
     lien.textContent = "Commander "
     button.textContent = "Ajouter au panier";
-    colors.textContent = product.colors;
     label.textContent = "Choisissez une couleur:";
 
     // Evenements sur le bouton et ajout au LOCAL STORAGE
@@ -104,7 +102,7 @@ function showProduct(product) {
 
     label.setAttribute("class", "mb-2 fw-bold");
     colorsList.setAttribute("id", "color-select");
-    colorsList.setAttribute("class", "form-select");
+    colorsList.setAttribute("class", "form-select w-50");
     lien.setAttribute("href", "panier.html");
     lien.setAttribute("class", "btn btn-warning ml-2")
 

@@ -36,9 +36,26 @@ function showProduct(product) {
   const heading = document.createElement("h2");
   const para = document.createElement("p");
   const description = document.createElement("p");
+  const link = document.createElement("a");
   const stock = document.createElement("p");
-  const colorsList = document.createElement("ul");
-  const colors = document.createElement("li");
+  const colorsList = document.createElement("select");
+  const optionQuantite = product.colors;
+  let structureOptions = "";
+
+
+
+
+    // Creation d'une boucle pour creer les options du produit
+
+    for (let i = 0; i < optionQuantite.length; i++) {
+        structureOptions = structureOptions +
+            `
+        <option value="${i + 1}">${optionQuantite[i]}</option>
+        `;
+
+
+    }
+  
 
   // Attribution de contenus
 
@@ -46,7 +63,6 @@ function showProduct(product) {
   para.textContent = "Prix: " + product.price / 100 + " €";
   description.textContent = product.description;
   stock.textContent = "En Stock";
-  colors.textContent = "Couleurs disponibles: " + product.colors;
 
   // Attribution de classes
 
@@ -57,11 +73,13 @@ function showProduct(product) {
   col.setAttribute("class", "col-12-xs col-xl-4 col-md-6");
   frame.setAttribute("class", "frame d-flex");
   card.setAttribute("href", "produit.html?id=" + product._id);
+  link.setAttribute("href", "produit.html?id=" + product._id);
   cardbody.setAttribute("class", "card-body");
   heading.setAttribute("class", "card-title");
   para.setAttribute("class", "card-text fw-bold fs-4");
-  stock.setAttribute("class", "btn btn-success");
-  colorsList.setAttribute("class", "d-none");
+  stock.setAttribute("class", "btn btn-success mt-3");
+  colorsList.setAttribute("id", "color-select");
+  colorsList.setAttribute("class", "form-select w-50");
 
   // Création du point d'injection du DOM
 
@@ -72,17 +90,15 @@ function showProduct(product) {
   col.appendChild(card);
   card.appendChild(frame);
   frame.appendChild(image);
-  card.appendChild(cardbody);
+  col.appendChild(cardbody);
   cardbody.appendChild(heading);
   cardbody.appendChild(description);
   cardbody.appendChild(para);
-  cardbody.appendChild(stock);
+  colorsList.innerHTML = structureOptions;
   cardbody.appendChild(colorsList);
-  colorsList.appendChild(colors);
+  cardbody.appendChild(link);
+  link.appendChild(stock);
+  
 
-  // Style css
-
-  card.style.textDecoration = "none";
-  colorsList.style.listStyle = "none";
   
 }
