@@ -29,11 +29,12 @@ if (prixTotal ===null || commandeId ===null){
 
 }
 
-// Suppression des objets du Local Storage excepté le contact
+// Suppression des objets du Local Storage
 
 localStorage.removeItem("panier");
 localStorage.removeItem("PrixTotal");
 localStorage.removeItem("responseId");
+localStorage.removeItem("contact");
 
 
 
