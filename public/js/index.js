@@ -4,6 +4,8 @@
 // 2 )Appeler la fonction showProduct pour l'affichage des elements
 // 3)reporter des erreurs eventuelles dans la récupération fetch
 
+
+
 fetch("http://localhost:3000/api/teddies")
   .then(function (response) {
     if (response.ok) {
@@ -19,6 +21,17 @@ fetch("http://localhost:3000/api/teddies")
 
   .catch(function (err) {
     console.log("Fetch problem" + err.message);
+    let sorry = `
+    <div class="container main__bg d-flex flex-column d-lg-flex justify-content-center" style="min-height: 900px">
+      <div class="row text-center" id="teddy">
+        <h1>Notre site est en maintenance,<br>Désolé pour la gêne occasionnée !</h1>
+      </div>
+    </div>`;
+    let maintenance = document.querySelector("#maintenance");
+    maintenance.insertAdjacentHTML("afterend", sorry);
+    console.log(sorry);
+
+
   });
 
 // ------------------FIN DU FETCH---------------------------
@@ -83,7 +96,7 @@ function showProduct(product) {
 
   // Création du point d'injection du DOM
 
-  let root = document.querySelector(".teddy");
+  var root = document.querySelector(".teddy");
 
   // Injection HTML dans le DOM
   root.appendChild(col);

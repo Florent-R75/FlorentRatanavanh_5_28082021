@@ -24,6 +24,14 @@ fetch("http://localhost:3000/api/teddies/" + id)
 
     .catch(function (err) {
         console.log("Fetch problem" + err.message);
+        let sorry = `
+            <div class="container main__bg d-flex flex-column d-lg-flex justify-content-center" style="min-height: 900px">
+            <div class="row text-center" id="teddy">
+                <h1>Notre site est en maintenance,<br>Désolé pour la gêne occasionnée !</h1>
+            </div>
+            </div>`;
+        let maintenance = document.querySelector("#maintenance");
+        maintenance.insertAdjacentHTML("afterend", sorry);
     });
 
 
