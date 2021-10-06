@@ -10,6 +10,7 @@ fetch("http://localhost:3000/api/teddies")
   .then(function (response) {
     if (response.ok) {
       return response.json();
+      console.log(response);
     }
   })
 
@@ -27,8 +28,8 @@ fetch("http://localhost:3000/api/teddies")
         <h1>Notre site est en maintenance,<br>Désolé pour la gêne occasionnée !</h1>
       </div>
     </div>`;
-    let maintenance = document.querySelector("#maintenance");
-    maintenance.insertAdjacentHTML("afterend", sorry);
+    let root = document.querySelector("#teddy");
+    root.insertAdjacentHTML("afterend", sorry);
     console.log(sorry);
 
 

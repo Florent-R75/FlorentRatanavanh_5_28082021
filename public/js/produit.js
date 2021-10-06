@@ -77,7 +77,7 @@ function showProduct(product) {
     heading.textContent = product.name;
     para.textContent = "Prix: " + product.price / 100 + "€";
     description.textContent = product.description;
-    lien.textContent = "Commander "
+    lien.textContent = "Commander"
     button.textContent = "Ajouter au panier";
     label.textContent = "Choisissez une couleur:";
 

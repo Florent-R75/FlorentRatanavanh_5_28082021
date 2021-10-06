@@ -73,7 +73,7 @@ for (let item of panier) {
     
     let prixProduitDansLePanier =item.price / 100;
     prixTotalCalcul.push(prixProduitDansLePanier);
-    console.log(prixTotalCalcul)
+    
 }
 
     // Additioner les prix du tableau avec la methode REDUCER et la mettre dans la variable "prixTotalAffiche"
@@ -124,6 +124,7 @@ const btn_tout_supprimer_panier_java = document.querySelector(".btn-tout-supprim
 btn_tout_supprimer_panier_java.addEventListener("click", (event) => {
     event.preventDefault();
     localStorage.removeItem('panier');
+    localStorage.removeItem('PrixTotal');
 
     alert("Le panier a été vidé")
     window.location.href = "panier.html";
@@ -205,7 +206,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
     // -------Assignation de variables
 
     const alertOrigine = (value) => {
-        return `${value} :Chiffres et symboles ne sont pas autorisés.\nMinimum 3 caractères, maximum 20 caractères.`
+        return `${value} :Chiffres et symboles ne sont pas autorisés.\nMinimum 3 caractères, maximum 20 caractères.`;
     };
 
     const regExPrenomNomVille = (value) => {
@@ -213,7 +214,7 @@ btnEnvoyerFormulaire.addEventListener('click', (e) => { e.preventDefault();
     };
     
     const regExEmail = (value) => {
-        return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
+        return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,5}$/.test(value);
     };
 
     const regExAdresse = (value) => {
